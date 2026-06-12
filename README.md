@@ -1,5 +1,14 @@
 # Demox Skill
 
+> [!TIP]
+> **把这个地址甩给你的 AI,然后开始爽!!!!** 🚀
+>
+> ```
+> https://github.com/demox-site/skill
+> ```
+>
+> 让 Claude Code / Cursor / 任意支持 Skill 的 AI 读取本仓库,它就学会用 `demox` CLI 帮你一键部署静态网站到 [Demox](https://demox.site) 了。
+
 An [Agent Skill](https://docs.claude.com/en/docs/claude-code/skills) that teaches AI coding agents (Claude Code, Claude Agent SDK, and other skill-compatible runtimes) how to deploy and manage static websites on the [Demox](https://demox.site) platform using the `demox` CLI.
 
 ## What it does
