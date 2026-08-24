@@ -15,12 +15,22 @@ An [Agent Skill](https://docs.claude.com/en/docs/claude-code/skills) that teache
 
 When the user asks to deploy a static site to Demox, or to list/inspect/update/delete their Demox-hosted sites, the agent loads this skill and follows the documented workflow — including the things that are easy to get wrong: the browser-based OAuth login that the agent can't complete itself, the interactive delete confirmation, and the 8 MB upload limit.
 
+To list every blocked phrase used by Demox content scan:
+
+```bash
+curl -s https://api.demox.site/website/content-scan/phrases
+```
+
+Human-readable list: https://www.demox.site/content-scan
+
 ## Layout
 
 ```
 skills/
   demox/
-    SKILL.md    # the skill: YAML frontmatter (name + description) + instructions
+    SKILL.md                 # deploy/manage sites + blocked-phrase API
+  demox-content-scan/
+    SKILL.md                 # look up the public blocklist
 ```
 
 ## Install

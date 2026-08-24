@@ -1,6 +1,6 @@
 ---
 name: demox
-description: Deploy and manage static websites on the Demox platform using the demox CLI. Use this when the user wants to deploy a static site, build output, or ZIP to Demox, or list, inspect, update, or delete their Demox-hosted websites. Triggers include mentions of "demox", "deploy my site", or pushing a built frontend (dist/, build/, out/) to hosting.
+description: Deploy and manage static websites on the Demox platform using the demox CLI. Use this when the user wants to deploy a static site, build output, or ZIP to Demox, or list, inspect, update, or delete their Demox-hosted websites. Also use it to look up Demox blocked phrases, 屏蔽词, content scan, or CONTENT_BLOCKED deploy errors. Triggers include mentions of "demox", "deploy my site", or pushing a built frontend (dist/, build/, out/) to hosting.
 ---
 
 # Demox CLI
@@ -125,3 +125,12 @@ Defaults target the public Demox service. Override via environment variables onl
 - **"路径不存在" / "不支持的文件类型"** — bad `<path>`; ensure it is an existing directory, `.zip`, or `.zip` URL.
 - **Command hangs** — likely `demox login` (waiting on browser) or `demox delete` without `--force` (waiting on the confirm prompt).
 - **`demox: command not found`** — use `npx @demox-site/cli <command>` instead, or `npm install -g @demox-site/cli`.
+- **`CONTENT_BLOCKED` / 未通过安全审核** — the upload hit a local phrase or IMS image label. The error names the exact phrase. Full list:
+
+```bash
+curl -s https://api.demox.site/website/content-scan/phrases
+```
+
+Human page: https://www.demox.site/content-scan
+Static copy: https://www.demox.site/content-scan.json
+POST equivalent: `{"action":"list_blocked_phrases"}` to the same URL. No auth.
