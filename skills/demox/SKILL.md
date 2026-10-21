@@ -79,7 +79,26 @@ On success it prints the website ID and URL. Capture the ID — it is needed to 
 demox list                # list all sites (alias: demox ls)
 demox info <websiteId>    # show one site's details (name, URL, path, timestamps)
 demox delete <websiteId>  # delete a site (alias: demox rm)
+demox projects            # list projects (alias: demox projects list)
+demox projects create -n <name>   # create a project (free plan: max 3)
 ```
+
+## Project database
+
+Each project has an isolated Demox MySQL table store (default **100MB** per project). Schema rules: lowercase table/column names, types `text`/`number`/`boolean`, exactly one **text** primary key.
+
+```bash
+demox db tables -p <projectId>
+demox db usage -p <projectId>
+demox db create-table -p <projectId> -n notes -c '[{"name":"id","type":"text","primary":true},{"name":"title","type":"text"}]'
+demox db describe -p <projectId> -t notes
+demox db rows -p <projectId> -t notes
+demox db put -p <projectId> -t notes -v '{"id":"1","title":"hello"}'
+demox db delete-row -p <projectId> -t notes --pk 1 --force
+demox db drop-table -p <projectId> -t notes --force
+```
+
+MCP tools mirror these: `list_project_tables`, `create_project_table`, `get_project_table`, `delete_project_table`, `list_project_rows`, `put_project_row`, `delete_project_row`, `get_project_db_usage`, `create_project`.
 
 **`demox delete` prompts for interactive y/N confirmation by default and will hang in a non-interactive shell.** When deleting on the user's behalf, either:
 - confirm with the user first, then run `demox delete <id> --force` (`-f`) to skip the prompt, or
